@@ -50,17 +50,17 @@ func Show(c *gin.Context) {
 func Create(c *gin.Context) {
 	newUser := models.User{}
 	id, err := strconv.Atoi(c.PostForm("id"))
-  if err != nil {
-    log.Fatal(err)
-  }
+	if err != nil {
+		log.Fatal(err)
+	}
 
-  newUser.ID = id
- 	newUser.NickName = c.PostForm("nickname")
+	newUser.ID = id
+	newUser.NickName = c.PostForm("nickname")
 
 	engine, err := xorm.NewEngine("mysql", "root:@/bookshelf")
-  if err != nil {
-    log.Fatal(err)
-  }
+	if err != nil {
+		log.Fatal(err)
+	}
 	engine.Insert(newUser)
 
 	c.JSON(200, newUser)
